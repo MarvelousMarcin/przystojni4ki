@@ -72,14 +72,16 @@ userRouter.post('/users/login', async (req, res) => {
 
 userRouter.delete('/users/delete', async (req, res) => {
     
+    let { email } = req.body;
+
     const user = await User.findOne({ email }); 
 
     if(!user)
         return res.status(400).send({ error: "Account with such email not found"});
     
-    User.deleteOne({ email });
+    await User.deleteOne({ email });
 
-    res.status(200).send({});
+    res.status(200).send();
 });
 
 module.exports = userRouter;
