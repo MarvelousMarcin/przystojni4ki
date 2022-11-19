@@ -1,0 +1,10 @@
+.section {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section h1 {
+  font-size: 3rem;
+}

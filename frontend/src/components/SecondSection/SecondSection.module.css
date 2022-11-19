@@ -1,0 +1,28 @@
+.section {
+  height: 100vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.section video {
+  width: 20rem;
+  border-radius: 1rem;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.article p {
+  font-size: 1rem;
+  color: #575252;
+}
+
+.article h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
