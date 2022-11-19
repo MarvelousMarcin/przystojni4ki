@@ -24,4 +24,11 @@
 
 .header li {
   cursor: pointer;
+  font-weight: 500;
+}
+
+.logo {
+  z-index: 3;
+  font-size: 1.9rem;
+  font-weight: 600;
 }
