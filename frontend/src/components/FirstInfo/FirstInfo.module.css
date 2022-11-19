@@ -1,0 +1,16 @@
+.firstInfo {
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstInfo h1 {
+  font-size: 1.8rem;
+}
+
+.firstInfo p {
+  font-size: 1.4rem;
+}

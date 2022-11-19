@@ -1,0 +1,17 @@
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 75%;
+  margin-top: 4rem;
+}
+
+.section img {
+  width: 15rem;
+  border-radius: 2rem;
+}
+
+.box {
+  text-align: center;
+}
