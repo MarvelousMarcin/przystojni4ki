@@ -1,12 +1,12 @@
 import classes from "./LandingHeader.module.css";
 
-const LandingHeader = () => {
+const LandingHeader = ({ setMenuIsOpen }) => {
   return (
     <header className={classes.header}>
-      <div>HistQuiz</div>
+      <div className={classes.logo}>HistQuiz</div>
       <nav>
         <ul>
-          <li>Zaloguj</li>
+          <li onClick={() => setMenuIsOpen((open) => !open)}>Zaloguj</li>
           <li>Stwórz konto</li>
         </ul>
       </nav>
