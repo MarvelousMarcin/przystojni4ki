@@ -37,7 +37,17 @@ questionRouter.put('/update', async (req, res) => {
 });
 
 questionRouter.post('/create', async (req, res) => {
-    res.send('CREATE');
+    const question = new Question({
+        content: "test",
+        answers: ["tests", "tests1"],
+        difficulty: "hard",
+        rating: 9,
+        keywords: ["hello", "hello1"]
+    });
+
+    question.save();
+
+    return res.status(200).send();
 });
 
 questionRouter.delete('/delete', async (req, res) => {

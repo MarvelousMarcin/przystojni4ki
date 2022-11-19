@@ -11,6 +11,7 @@ const questionRouter = require('./routes/Question');
 
 app.use(express.json());
 app.use(userRouter);
+app.use(questionRouter);
 
 app.get("/", (req, res) => {
   res.send("hello world");
