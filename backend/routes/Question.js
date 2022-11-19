@@ -4,54 +4,91 @@ const questionRouter = express.Router();
 
 
 
-questionRouter.get('/get/:id', async (req, res) => {
-    const question1 = new Question({
-        content: "I am gonna wwwaaaalk to POLAND",
-        answers: [
-            {number: 1, answer: "YES YES YES"},
-            {number: 2, answer: "NO NO NO"},
-        ],
-        difficulty: "hard",
-        rating: 9,
-        keywords: [
-            "czarny", "biały", "1917"
-        ],
-        correctAnswer: 1
-        
-    });
+questionRouter.get('/questions/get', async (req, res) => {
+    if(!req.body)
+        return res.status(400).send({ error: "Wrong body"});
 
-    await question1.save();
+    let { year } = req.body;
 
-    res.send(question1);
+    const question = await Question.findOne({ year }); 
+
+    if(!question)
+        return res.status(400).send({ error: "Question not found"});
+
+    res.send(question);
 });
 
-questionRouter.get('/get', async (req, res) => {
-    res.send('GET');
-    const amount = req.body.amount;
-    const difficulty = req.body.difficulty;
-    const keywords = req.body.keywords;
+questionRouter.get('/questions/getAll', async (req, res) => {
+    
+    let { year, difficulty, amount = 10 } = req.body;
+
+    if(!Question.find())
+        return res.status(400).send({ error: "Questions not found" });
+
+    if(amount > 50)
+        return res.status(400).send({ error: "Too many questions to be selected" });
+
+    const questions = await Question.find({ year, difficulty }).limit(amount);
+
+    if(questions)
+        res.send(questions);
+    else
+        res.status(400).send({ error: "Questions with such parameteres not found" });
 });
 
-questionRouter.put('/update', async (req, res) => {
-    res.send('UPDATE');
+questionRouter.post('/questions/create', async (req, res) => {
+    if(!req.body)
+        return res.status(400).send({ error: "Wrong body"});
+    
+    let { content, answers, year, difficulty, rating, keywords } = req.body;
+
+    if(!content || !answers || !year || !difficulty || !rating || !keywords)
+        return res.status(400).send({ error: "Wrong data"});
+    
+    const question = await Question.findOne({ content }); 
+
+    if(question)
+        return res.status(400).send({ error: "Question with same content already in database"});
+    
+    try {
+        new Question({ content, answers, year, difficulty, rating, keywords }).save();
+        return res.status(200).send({ added: true});
+    } catch (error) {
+        return res.status(400).send({ error });
+    }
 });
 
-questionRouter.post('/create', async (req, res) => {
-    const question = new Question({
-        content: "test",
-        answers: ["tests", "tests1"],
-        difficulty: "hard",
-        rating: 9,
-        keywords: ["hello", "hello1"]
-    });
+questionRouter.post('/questions/changeRating', async (req, res) => {
+    if(!req.body)
+        return res.status(400).send({ error: "Wrong body"});
+    
+    let { content } = req.body;
 
-    question.save();
+    if(!content)
+        return res.status(400).send({ error: "Wrong data"});
+    
+    const question = await Question.findOne({ content }); 
 
-    return res.status(200).send();
+    if(!question)
+        return res.status(400).send({ error: "Question with such content not found"});
+    
+    await question.update({ rating: question.rating - 1 });
+    res.status(200).send({ changed: true });
+    
 });
 
 questionRouter.delete('/delete', async (req, res) => {
-    res.send('DELETE');
+        
+    let { content } = req.body;
+
+    const question = await Question.findOne({ content }); 
+
+    if(!question)
+        return res.status(400).send({ error: "Question with such content not found"});
+    
+    await Question.deleteOne({ content });
+
+    res.status(200).send();
 });
 
 module.exports = questionRouter;
