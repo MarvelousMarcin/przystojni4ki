@@ -35,7 +35,6 @@ userRouter.post('/users/register', async (req, res) => {
     
     const user = await User.findOne({ email }); 
 
-    console.log(user);
     if(user)
         return res.status(400).send({ error: "Email already used in database"});
     
@@ -62,9 +61,8 @@ userRouter.post('/users/login', async (req, res) => {
     if(!user)
         return res.status(400).send({ error: "Account with such email not found"});
     
-    console.log(bcrypt.compareSync(user.password, password));
     if(bcrypt.compareSync(password, user.password))
-        res.status(200).send({ correctPassowrd: true });
+        res.status(200).send({ correctPassword: true });
     else
         res.status(403).send({ error: "Incorrect password"});
     
