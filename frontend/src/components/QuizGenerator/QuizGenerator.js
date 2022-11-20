@@ -3,9 +3,12 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import pdf from "../../assets/pdf.png";
 import docx from "../../assets/docx.png";
+import arrow from "../../assets/arrow.png";
+import { useNavigate, useNavigation } from "react-router";
 
 const QuizGenerator = () => {
   const [isOn, setIsOn] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSwitch = () => setIsOn(!isOn);
 
@@ -17,6 +20,14 @@ const QuizGenerator = () => {
 
   return (
     <section className={classes.generator}>
+      <img
+        alt=""
+        src={arrow}
+        onClick={() => {
+          navigate("/");
+        }}
+        className={classes.back}
+      />
       <h1>Wygeneruj Quiz</h1>
       <form className={classes.form}>
         <input placeholder="Liczba pytań" type="number" />

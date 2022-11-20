@@ -31,7 +31,7 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const response = await fetch("http://localhost:2000/users/login", {
+    const response = await fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

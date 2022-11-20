@@ -35,7 +35,7 @@ const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
       return;
     }
 
-    const response = await fetch("http://localhost:2000/users/register", {
+    const response = await fetch("http://localhost:4000/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

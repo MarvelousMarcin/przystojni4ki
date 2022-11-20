@@ -7,6 +7,15 @@
   align-items: center;
 }
 
+.back {
+  width: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 2rem;
+  cursor: pointer;
+}
+
 .generator h1 {
   font-size: 2rem;
 }
