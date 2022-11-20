@@ -6,17 +6,17 @@ require("./db/connect");
 
 const PORT = process.env.PORT || 4000;
 const app = express();
+app.use(cors());
 
 const userRouter = require("./routes/User");
 const questionRouter = require("./routes/Question");
 
-app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(questionRouter);
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send({ test: "hey" });
 });
 
 app.listen(PORT, () => {
