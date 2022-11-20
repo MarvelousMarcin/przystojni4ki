@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 const LandingHeader = ({ setMenuIsOpen, setRegisterIsOpen }) => {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>HistQuiz</div>
+      <div className={classes.logo}>
+        Hist<span className={classes.outline}>Quiz</span>
+      </div>
       <nav>
         <ul>
           <motion.li
