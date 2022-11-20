@@ -70,7 +70,13 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
           />
           <motion.button
             onClick={handleLogIn}
-            whileHover={{}}
+            whileHover={{
+              scale: 1.08,
+              transition: {
+                type: "spring",
+                stiffness: 700,
+              },
+            }}
             className={classes.btn}
           >
             Zaloguj
