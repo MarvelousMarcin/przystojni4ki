@@ -45,3 +45,8 @@
   font-weight: 800;
   cursor: pointer;
 }
+
+.err {
+  color: "red";
+  text-align: center;
+}

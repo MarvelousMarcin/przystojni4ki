@@ -1,12 +1,14 @@
 import classes from "./RegistrationPage.module.css";
 import arrow from "../../assets/arrow.png";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordAgainRef = useRef(null);
+
+  const [isRegisterDataGood, setIsRegisterDataGood] = useState(true);
 
   const registerVariants = {
     open: {
@@ -20,6 +22,21 @@ const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
       x: "100%",
       transition: {
         type: "bounce",
+      },
+    },
+  };
+
+  const errorVariants = {
+    good: {
+      scale: 0,
+      transition: {
+        type: "spring",
+      },
+    },
+    bad: {
+      scale: 1,
+      transition: {
+        type: "spring",
       },
     },
   };
@@ -46,7 +63,7 @@ const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
     if (response.ok) {
       const data = await response.json();
     } else {
-      alert("error");
+      setIsRegisterDataGood(false);
     }
   };
 
@@ -77,6 +94,15 @@ const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
           placeholder="Powtórz Hasło"
           type="password"
         />
+        <motion.p
+          style={{ color: "red" }}
+          className={classes.err}
+          variants={errorVariants}
+          initial="good"
+          animate={isRegisterDataGood ? "good" : "bad"}
+        >
+          Błędne dane rejestracji
+        </motion.p>
         <motion.button
           whileHover={{
             scale: 1.08,
@@ -94,7 +120,10 @@ const RegistrationPage = ({ setRegisterIsOpen, registerIsOpen }) => {
       <img
         alt=""
         src={arrow}
-        onClick={() => setRegisterIsOpen((open) => !open)}
+        onClick={() => {
+          setRegisterIsOpen((open) => !open);
+          setIsRegisterDataGood(true);
+        }}
         className={classes.back}
       />
     </motion.section>
