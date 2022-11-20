@@ -1,8 +1,9 @@
 import classes from "./QuizGenerator.module.css";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import pdf from "../../assets/pdf.png";
 import docx from "../../assets/docx.png";
+import GeneratePdf from "../../scripts/pdfGenerator.js"
 
 const QuizGenerator = () => {
   const [isOn, setIsOn] = useState(false);
@@ -23,7 +24,7 @@ const QuizGenerator = () => {
         <input placeholder="Rok" type="number" />
         <input placeholder="Poziom trudności" type="text" />
 
-        <button data-isOn={isOn}>Generuj</button>
+        <button data-isOn={isOn} onClick={GeneratePdf}>Generuj</button>
       </form>
       <section className={classes.section}>
         <img src={pdf} />

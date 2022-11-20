@@ -18,7 +18,7 @@ questionRouter.get('/questions/get', async (req, res) => {
     res.send(question);
 });
 
-questionRouter.get('/questions/getAll', async (req, res) => {
+questionRouter.post('/questions/getAll', async (req, res) => {
     
     let { year, difficulty, amount = 10 } = req.body;
 
