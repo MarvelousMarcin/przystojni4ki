@@ -23,7 +23,18 @@ const QuizGenerator = () => {
         <input placeholder="Rok" type="number" />
         <input placeholder="Poziom trudności" type="text" />
 
-        <button data-isOn={isOn}>Generuj</button>
+        <motion.button
+          whileHover={{
+            scale: 1.08,
+            transition: {
+              type: "spring",
+              stiffness: 700,
+            },
+          }}
+          data-isOn={isOn}
+        >
+          Generuj
+        </motion.button>
       </form>
       <section className={classes.section}>
         <img src={pdf} />

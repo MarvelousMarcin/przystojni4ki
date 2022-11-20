@@ -34,6 +34,7 @@
   color: white;
   height: 2.5rem;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .switch {
