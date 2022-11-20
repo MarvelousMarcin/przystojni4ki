@@ -1,4 +1,5 @@
 import classes from "./LandingHeader.module.css";
+import { motion } from "framer-motion";
 
 const LandingHeader = ({ setMenuIsOpen, setRegisterIsOpen }) => {
   return (
@@ -6,10 +7,18 @@ const LandingHeader = ({ setMenuIsOpen, setRegisterIsOpen }) => {
       <div className={classes.logo}>HistQuiz</div>
       <nav>
         <ul>
-          <li onClick={() => setMenuIsOpen((open) => !open)}>Zaloguj</li>
-          <li onClick={() => setRegisterIsOpen((open) => !open)}>
+          <motion.li
+            whileHover={{ scale: 1.1, color: "white" }}
+            onClick={() => setMenuIsOpen((open) => !open)}
+          >
+            Zaloguj
+          </motion.li>
+          <motion.li
+            whileHover={{ scale: 1.1, color: "white" }}
+            onClick={() => setRegisterIsOpen((open) => !open)}
+          >
             Stwórz konto
-          </li>
+          </motion.li>
         </ul>
       </nav>
     </header>
