@@ -8,6 +8,8 @@
   padding: 0 2rem;
   font-size: 1.1rem;
   font-weight: 400;
+  color: black;
+  -webkit-text-stroke: 0.5px black; /* width and color */
 }
 
 .header nav {
@@ -25,10 +27,11 @@
 .header li {
   cursor: pointer;
   font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .logo {
   z-index: 3;
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 600;
 }
