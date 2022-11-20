@@ -1,7 +1,7 @@
 import classes from "./LoginPage.module.css";
 import { motion } from "framer-motion";
 import arrow from "../../assets/arrow.png";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
@@ -9,6 +9,7 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
 
+  const [isDataCorrect, setIsDataCorrect] = useState(true);
   const loginVariants = {
     open: {
       x: 0,
@@ -25,13 +26,28 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
     },
   };
 
+  const errorVariants = {
+    good: {
+      scale: 0,
+      transition: {
+        type: "spring",
+      },
+    },
+    bad: {
+      scale: 1,
+      transition: {
+        type: "spring",
+      },
+    },
+  };
+
   const handleLogIn = async (e) => {
     e.preventDefault();
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const response = await fetch("http://localhost:2000/users/login", {
+    const response = await fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +58,9 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
     if (response.ok) {
       navigate("/logged");
     } else {
-      alert("Wrong pass");
+      setIsDataCorrect(false);
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
     }
   };
 
@@ -68,9 +86,25 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
             placeholder="Hasło"
             type="password"
           />
+
+          <motion.p
+            variants={errorVariants}
+            initial="good"
+            animate={isDataCorrect ? "good" : "bad"}
+            className={classes.error}
+          >
+            Błędne dane logowania
+          </motion.p>
+
           <motion.button
             onClick={handleLogIn}
-            whileHover={{}}
+            whileHover={{
+              scale: 1.08,
+              transition: {
+                type: "spring",
+                stiffness: 700,
+              },
+            }}
             className={classes.btn}
           >
             Zaloguj
@@ -80,7 +114,10 @@ const LoginPage = ({ menuIsOpen, setMenuIsOpen }) => {
       <img
         alt=""
         src={arrow}
-        onClick={() => setMenuIsOpen((open) => !open)}
+        onClick={() => {
+          setMenuIsOpen((open) => !open);
+          setIsDataCorrect(true);
+        }}
         className={classes.back}
       />
     </motion.section>

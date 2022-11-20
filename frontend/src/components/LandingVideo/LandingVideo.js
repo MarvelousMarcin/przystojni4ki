@@ -1,5 +1,5 @@
 import classes from "./LandingVideo.module.css";
-import video1 from "../../assets/test.mp4";
+import video1 from "../../assets/test3.mp4";
 
 const LandingVideo = () => {
   return (
